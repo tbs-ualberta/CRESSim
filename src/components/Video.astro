@@ -1,18 +1,22 @@
 ---
 interface Props {
   source: string;
+  autoplay?: boolean;
+  controls?: boolean;
+  muted?: boolean;
+  loop?: boolean;
 }
 
-const { source } = Astro.props;
+const { source, autoplay = true, controls = true, muted = false, loop = false } = Astro.props;
 ---
 
 <div class="w-full flex justify-center">
   <video
     class="w-full h-auto aspect-video rounded-lg"
-    autoplay
-    controls
-    muted
-    loop
+    { ...(autoplay ? { autoplay: "true" } : {}) }
+    { ...(controls ? { controls: "true" } : {}) }
+    { ...(muted ? { muted: "true" } : {}) }
+    { ...(loop ? { loop: "true" } : {}) }
   >
     <source src={source} type="video/mp4" />
   </video>

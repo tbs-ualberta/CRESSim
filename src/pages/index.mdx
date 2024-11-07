@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: Academic Project Page Template
-description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+title: "CRESSim: Another Surgical Simulator for Augmented Dexterity and Autonomy in Surgery"
+description: "CRESSim: Another Surgical Simulator for Augmented Dexterity and Autonomy in Surgery"
 favicon: favicon.svg
 thumbnail: screenshot.png
 ---
@@ -17,10 +17,10 @@ import Image from "../components/Image.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
+import HLine from "../components/HLine.astro";
 
-import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
-import Splat from "../components/Splat.tsx"
+import zargarzadeh2024decision from "../assets/zargarzadeh2024decision.mp4";
+import ou2024learning from "../assets/ou2024learning.mp4";
 
 import CodeBlock from "../components/CodeBlock.astro";
 export const components = {pre: CodeBlock}
@@ -29,125 +29,124 @@ export const components = {pre: CodeBlock}
   title={frontmatter.title}
   authors={[
     {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "Independent",
-      notes: ["*", "†"],
-    },
-    {
-      name: "Author Two",
-      institution: "Institution Two",
-      notes: ["*", "†"],
-    },
-    {
-      name: "Author Three",
-      institution: "Institution Three",
-      notes: ["†"],
-    },
-    {
-      name: "Author Four",
-      institution: "Institution Four",
-    },
-  ]}
-  conference="Conference Name"
-  notes={[
-    {
-      symbol: "*",
-      text: "author note one",
-    },
-    {
-      symbol: "†",
-      text: "author note two",
-    },
+      name: "Telerobotics and Biorobotics Group",
+      url: "https://www.ece.ualberta.ca/~tbs/pmwiki/",
+      institution: "University of Alberta"
+    }
   ]}
   links={[
     {
-      name: "Paper",
+      name: "Code 1",
       url: "",
-      icon: "fa-solid:file-pdf",
-    },
-    {
-      name: "Code",
-      url: "https://github.com/RomanHauksson/academic-project-astro-template",
       icon: "mdi:github",
     },
     {
-      name: "arXiv",
+      name: "Code 2",
       url: "",
-      icon: "academicons:arxiv",
+      icon: "mdi:github",
     },
   ]}
   />
-
-<Video source={outside} />
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+Realistic real-time surgical simulators play an increasingly important role in surgical robotics research,
+such as surgical robot learning and automation, and surgical skills assessment. 
+The ability to simulate the diverse types of objects and contact-rich manipulation tasks,
+such as tissue cutting and blood suction, is important as they typically present in surgeries.
+We propose another surgical simulator for the da Vinci Research Kit (dVRK), CRESSim,
+that enables simulating various contact-rich surgical tasks involving different surgical instruments, soft tissue, and body fluids.
+The real-world dVRK console and the master tool manipulator (MTM) robots are incorporated into the system to allow for teleoperation
+through virtual reality (VR).
+With CRESSim, we aim to advance surgical autonomy and augmented dexterity for surgeons
+by developing autonomous agents capable of completing surgical subtasks.
+
+If you find this project helpful, please consider citing one or more of the papers listed below.
+
+{/* ```bibtex
+@inproceedings{ou2024realistic,
+  title={A Realistic Surgical Simulator for Non-Rigid and Contact-Rich Manipulation in Surgeries with the da Vinci Research Kit}, 
+  author={Ou, Yafei and Zargarzadeh, Sadra and Sedighi, Paniz and Tavakoli, Mahdi},
+  booktitle={2024 21st International Conference on Ubiquitous Robots (UR)}, 
+  year={2024},
+  pages={64-70}
+}
+``` */}
 
 </HighlightedSection>
 
-## Figures
+## Project Papers
 
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
+### [2024] Learning Autonomous Surgical Irrigation and Suction with the da Vinci Research Kit Using Reinforcement Learning
 
-<Figure
-    caption="Diagram of the transformer deep learning architecture."
-  >
-    <Image source={transformer} altText="Diagram of the transformer deep learning architecture." />
+Yafei Ou, Mahdi Tavakoli\
+*Paper not available yet*
+
+<Figure maxWidth="max-w-3xl">
+  <Video source={ou2024learning} autoplay={false} />
 </Figure>
 
-## Two columns
+<HLine />
 
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+### [2024] From Decision to Action in Surgical Autonomy: Multi-Modal Large Language Models for Robot-Assisted Blood Suction
 
-<TwoColumns>
-  <Figure slot="left" caption="Take a look at this YouTube video.">
-    <YouTubeVideo videoId="wjZofJX0v4M" />
-  </Figure>
-  <Figure slot="right" caption="Now look at this Gaussian Splat, rendered with a React component.">
-    <Splat client:idle />
-  </Figure>
-</TwoColumns>
+Sadra Zargarzadeh, Maryam Mirzaei, Yafei Ou, Mahdi Tavakoli \
+*arXiv preprint arXiv:2408.07806* \[[arxiv](https://arxiv.org/abs/2408.07806)\]
 
-## Heading levels
-
-Use headings to divide your content into sections.
-
-### Heading 3
-
-Go down a level to heading 3...
-
-#### Heading 4
-
-...and down again to heading 4.
-
-## LaTeX
-
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
-
-<LaTeX formula="\int_a^b f(x) dx" />
-
-## Tables
-
-You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
-
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
-
-## BibTeX citation
+<Figure maxWidth="max-w-3xl">
+  <Video source={zargarzadeh2024decision} autoplay={false} />
+</Figure>
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@article{zargarzadeh2024decision,
+  title={From Decision to Action in Surgical Autonomy: Multi-Modal Large Language Models for Robot-Assisted Blood Suction},
+  author={Zargarzadeh, Sadra and Mirzaei, Maryam and Ou, Yafei and Tavakoli, Mahdi},
+  journal={arXiv preprint arXiv:2408.07806},
+  year={2024}
 }
 ```
+
+<HLine />
+
+### [2024] A Realistic Surgical Simulator for Non-Rigid and Contact-Rich Manipulation in Surgeries with the da Vinci Research Kit
+
+Yafei Ou, Sadra Zargarzadeh, Paniz Sedighi, Mahdi Tavakoli \
+*2024 21st International Conference on Ubiquitous Robots (UR)* \[[paper](https://ieeexplore.ieee.org/document/10597513)\] \[[arxiv](https://arxiv.org/abs/2404.05888)\]
+
+<Figure maxWidth="max-w-3xl">
+  <YouTubeVideo videoId="GIBHPmgqJcs" />
+</Figure>
+
+```bibtex
+@inproceedings{ou2024realistic,
+  title={A Realistic Surgical Simulator for Non-Rigid and Contact-Rich Manipulation in Surgeries with the da Vinci Research Kit}, 
+  author={Ou, Yafei and Zargarzadeh, Sadra and Sedighi, Paniz and Tavakoli, Mahdi},
+  booktitle={2024 21st International Conference on Ubiquitous Robots (UR)}, 
+  year={2024},
+  pages={64-70}
+}
+```
+<HLine />
+
+### [2024] Autonomous blood suction for robot-assisted surgery: A sim-to-real reinforcement learning approach
+
+Yafei Ou, Abed Soleymani, Xingyu Li, Mahdi Tavakoli \
+*IEEE Robotics and Automation Letters* \[[paper](https://ieeexplore.ieee.org/abstract/document/10578312)\]
+
+<Figure maxWidth="max-w-3xl">
+  <YouTubeVideo videoId="u75v2EOT38Q" />
+</Figure>
+
+```bibtex
+@article{ou2024autonomous,
+  title={Autonomous blood suction for robot-assisted surgery: A sim-to-real reinforcement learning approach},
+  author={Ou, Yafei and Soleymani, Abed and Li, Xingyu and Tavakoli, Mahdi},
+  journal={IEEE Robotics and Automation Letters},
+  year={2024},
+  publisher={IEEE}
+}
+```
+
+<HLine />

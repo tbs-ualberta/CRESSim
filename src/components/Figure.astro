@@ -1,13 +1,14 @@
 ---
 interface Props {
   caption: string;
+  maxWidth?: string; // Optional maxWidth prop to control max width
 }
 
-const { caption } = Astro.props;
+const { caption, maxWidth = "max-w-full" } = Astro.props; // Default to full width if not specified
 ---
 
-<figure class="w-full flex flex-col gap-2 items-center">
-  <div class="*:max-h-[35rem] *:object-contain flex justify-center w-full">
+<figure class={`w-full max-w-32 flex flex-col gap-2 items-center`}>
+  <div class=`*:max-h-[35rem] *:object-contain flex justify-center w-full ${maxWidth}`>
     <slot />
   </div>
   <figcaption class="text-center text-zinc-700">
