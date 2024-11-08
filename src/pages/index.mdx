@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/Layout.astro
-title: "CRESSim: Another Surgical Simulator for Augmented Dexterity and Autonomy in Surgery"
+title: "CRESSim: Surgical Simulator for Augmented Dexterity and Autonomy in Surgery"
 description: "CRESSim: Another Surgical Simulator for Augmented Dexterity and Autonomy in Surgery"
 favicon: favicon.svg
 thumbnail: screenshot.png
@@ -21,6 +21,7 @@ import HLine from "../components/HLine.astro";
 
 import zargarzadeh2024decision from "../assets/zargarzadeh2024decision.mp4";
 import ou2024learning from "../assets/ou2024learning.mp4";
+import overview from "../assets/overview.png";
 
 import CodeBlock from "../components/CodeBlock.astro";
 export const components = {pre: CodeBlock}
@@ -48,11 +49,15 @@ export const components = {pre: CodeBlock}
   ]}
   />
 
+<Figure>
+  <Image source={overview} altText="Diagram of the transformer deep learning architecture." />
+</Figure>
+
 <HighlightedSection>
 
-## Abstract
+## Overview
 
-Realistic real-time surgical simulators play an increasingly important role in surgical robotics research,
+Realistic and real-time surgical simulators play an increasingly important role in surgical robotics research,
 such as surgical robot learning and automation, and surgical skills assessment. 
 The ability to simulate the diverse types of objects and contact-rich manipulation tasks,
 such as tissue cutting and blood suction, is important as they typically present in surgeries.
@@ -63,7 +68,7 @@ through virtual reality (VR).
 With CRESSim, we aim to advance surgical autonomy and augmented dexterity for surgeons
 by developing autonomous agents capable of completing surgical subtasks.
 
-If you find this project helpful, please consider citing one or more of the papers listed below.
+Learn more about the technical details [here](architecture). If you find this project helpful for your research, please consider citing one or more of the papers listed below.
 
 {/* ```bibtex
 @inproceedings{ou2024realistic,

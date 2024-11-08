@@ -1,3 +1,12 @@
+---
+interface Props {
+  thickness: string;
+  color: string;
+}
+
+const { thickness = "border-t", color = "border-gray-300" } = Astro.props; // Default to full width if not specified
+---
+
 <div class="flex flex-wrap gap-4 items-center w-full">
-  <div class="w-full border-t border-gray-300 my-4"></div>
+  <div class=`rounded-lg w-full ${thickness} ${color} my-4`></div>
 </div>

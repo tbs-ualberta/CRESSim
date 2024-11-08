@@ -1,0 +1,73 @@
+---
+layout: ../layouts/Layout.astro
+title: "Architecture - CRESSim"
+description: "Technical Architecture"
+favicon: favicon.svg
+thumbnail: screenshot.png
+---
+
+import Layout from "../layouts/Layout.astro";
+
+import Header from "../components/Header.astro";
+import Video from "../components/Video.astro";
+import HighlightedSection from "../components/HighlightedSection.astro";
+import SmallCaps from "../components/SmallCaps.astro";
+import Figure from "../components/Figure.astro";
+import Image from "../components/Image.astro";
+import TwoColumns from "../components/TwoColumns.astro";
+import YouTubeVideo from "../components/YouTubeVideo.astro";
+import LaTeX from "../components/LaTeX.astro";
+import HLine from "../components/HLine.astro";
+
+import CodeBlock from "../components/CodeBlock.astro";
+export const components = {pre: CodeBlock}
+
+import architecture_overview from "../assets/architecture_overview.png";
+import fluid_rendering from "../assets/fluid_rendering.png";
+import teleoperation from "../assets/teleoperation.png";
+
+
+# Technical Architecture
+
+<HLine thickness="border-t-4" />
+
+## Overview
+
+CRESSim is mainly developed with Unity and [NVIDIA PhysX 5](https://nvidia-omniverse.github.io/PhysX/physx/index.html). The fundamental building block is the "PhysX 5 for Unity" plugin. The plugin allows using PhysX 5 as the physics engine and adding rigid bodies, soft bodies, cloth, fluid, and kinematic trees (and robots) into Unity.
+Based on PhysX 5 for Unity, PSM robots are simulated as articulation robots, and [ML-Agents](https://github.com/Unity-Technologies/ml-agents) is then used for defining RL environments. ROS-Unity integration is further realized to allow ROS communication between Unity and the dVRK software, which allows the teleoperation of the simulated robot and collecting human demonstrations.
+
+<Figure maxWidth="max-w-lg" caption="Architecture overview.">
+  <Image source={architecture_overview} altText="Architecture overview." />
+</Figure>
+
+<HLine />
+
+## PhysX 5 for Unity
+
+The plugin contains native libraries (written in C++) for Windows and Linux that provide the APIs to use PhysX 5 in Unity. It also provides some functionalities for robotics, including forward and inverse kinematics. On the Unity side (C#), components are implemented based on the native APIs to allow the easy creation of simulated objects in Unity, including rigid bodies, FEM soft bodies, PBD cloth and inflatables, PBD fluid, and kinematic trees with articulation joints (including robots). For details about PhysX 5, please refer to NVIDIA's documentation.
+
+Since PBD fluid is used, fluid rendering is also handled in this part. A typical screen-space rendering technique is used, with a [narrow-range filter](https://dl.acm.org/doi/10.1145/3203201). In short, each particle is drawn in screen space as an ellipsoid to obtain a fluid surface, after which the filter is applied to smooth it. We also assign a color value to each particle and achieve fluid color mixing effects by diffusing the particle colors. In total, 3 passes are needed before rendering the final scene: one depth pass to extract the fluid surface in screen space, one filtering pass to smooth the surface, and one color pass to extract the surface colors. The final scene is then rendered using Unity's regular forward rendering path in a per-pixel manner.
+
+<Figure maxWidth="max-w-xl" caption="Fluid rendering.">
+  <Image source={fluid_rendering} altText="Fluid rendering." />
+</Figure>
+
+<HLine />
+
+## PhysX 5 Native Plugin
+
+This is a relatively simple and rough implementation that wraps around commonly used functionalities in PhysX 5 to add/remove PhysX objects, such as scenes (`PxScene`) and actors (`PxActor`). Collision filtering and modification have not been added. Some scene query features are also used but only because they make implementing the Unity side easier.
+
+<HLine />
+
+## ROS-Unity Integration for dVRK
+
+To achieve communication between Unity and dVRK, we follow the steps at [Unity-Robotics-Hub](https://github.com/Unity-Technologies/Unity-Robotics-Hub). The dVRK software is built with the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package. On Unity's side, the package ROS-TCP-Connector is used. DVRK-specific ROS messages are generated (we are using ROS 1 with dVRK 2.1.0).
+
+Coroutines are extensively used in Unity's scripts due to the need to wait for sending/receiving ROS messages across multiple frames. So far, only the MTM has been integrated and only basic functionalities have been implemented, such as homing and reading/setting poses. Also, note that Unity uses a left-handed coordinate system.
+
+<Figure maxWidth="max-w-xl" caption="Teleoperation.">
+  <Image source={teleoperation} altText="Teleoperation." />
+</Figure>
+
+<HLine />
