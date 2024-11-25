@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fea473a5bf3a2e0480a06ee34e0a1b5, type: 3}
+  m_Name: Suction Random Parameters
+  m_EditorClassIdentifier: 
+  m_parameterArray:
+  - Min: 0
+    Max: 0
+  - Min: 5
+    Max: 5
+  - Min: 0.0001
+    Max: 0.0001
+  - Min: 0.03
+    Max: 0.03
+  - Min: 0.2
+    Max: 0.2
+  - Min: 5
+    Max: 5
+  - Min: 0
+    Max: 0.2
+  - Min: 0
+    Max: 10
+  - Min: 0.2
+    Max: 1
+  - Min: 2
+    Max: 10
+  - Min: 0.3
+    Max: 1
+  - Min: 1
+    Max: 4.999
+  - Min: -10
+    Max: 10
+  - Min: -10
+    Max: 10
+  - Min: -10
+    Max: 10
+  - Min: 0.7
+    Max: 1
+  - Min: 0.2
+    Max: 0.5
+  - Min: -0.5
+    Max: 0.5
+  - Min: -0.5
+    Max: 0.5
+  - Min: -0.2
+    Max: 0.2
+  - Min: -2
+    Max: 2
+  - Min: -2
+    Max: 2
+  - Min: -0.5
+    Max: 0.5
+  m_parameterNames:
+  - action_penalty
+  - completion_reward
+  - ee_pose_penalty
+  - ee_force_penalty
+  - approaching_reward_distance_threshold
+  - approaching_reward
+  - friction
+  - viscocity
+  - surface_tension
+  - cohesion
+  - blood_amount
+  - blood_regions
+  - light_rotation_diff_x
+  - light_rotation_diff_y
+  - light_rotation_diff_z
+  - light_intensity
+  - light_shadow_strength
+  - camera_position_diff_x
+  - camera_position_diff_y
+  - camera_position_diff_z
+  - camera_rotation_diff_x
+  - camera_rotation_diff_y
+  - camera_rotation_diff_z

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Training Area 1
+  - Training Area 2
+  - Training Area 3
+  - Training Area 4
+  - Training Area 5
+  - Training Area 6
+  - Training Area 7
+  - Training Area 8
+  - Training Area 9
+  - Training Area 10
+  - Training Area 11
+  - Training Area 12
+  - Training Area 13
+  - Training Area 14
+  - Training Area 15
+  - Training Area 16
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Learning/Suction/Blood Suction Rigid Body.unity
+    guid: f74b90459f86d244ea96b9ed47e88e7e
+  - enabled: 1
+    path: Assets/Scenes/Learning/Irrigation/Irrigation Rigid Body.unity
+    guid: 88ca8fa8a3e897b488162f4078f75b8e
+  m_configObjects: {}

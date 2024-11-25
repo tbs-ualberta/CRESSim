@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &139824869312907078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5545682717279200666}
+  - component: {fileID: 1660660027351941039}
+  - component: {fileID: 8233663251520781629}
+  - component: {fileID: 3646951431714090810}
+  - component: {fileID: 6092290732257724701}
+  m_Layer: 0
+  m_Name: Irrigation PBD Particle System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5545682717279200666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139824869312907078}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660660027351941039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139824869312907078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7f463a85b04b447a92f1ced5e7fd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_scene: {fileID: 11400000, guid: ac4aa1fdae8e90e49898ce073e1bf384, type: 2}
+  m_particleSpacing: 0.1
+  m_maxNumParticles: 30000
+  m_maxNumParticlesForAnisotropy: 30000
+  m_fluidShadowCastingMode: 0
+--- !u!33 &8233663251520781629
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139824869312907078}
+  m_Mesh: {fileID: 0}
+--- !u!23 &3646951431714090810
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139824869312907078}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6092290732257724701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139824869312907078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4030bd9414475459ecb424c445b593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_chunkAddShader: {fileID: 7200000, guid: 5e5241aa7ef1131449d68dcbec8f5198, type: 3}
+  m_fluidShader: {fileID: 4800000, guid: 81d8ef1dd09e6d847b408a6269229d9d, type: 3}
+  m_fluidMaterial: {fileID: 2100000, guid: ab1e095706f7a424992bde87d259f41a, type: 2}
+  m_lerpBlend: 0
+  m_depthFilterType: 1
+  m_narrowFilter1D: 1
+  m_filterIterations: 1
+  m_filterWorldSize: 3
+  m_filterThresholdRatio: 1
+  m_filterClampRatio: 0.5
+  m_filterCleanUpFixedSize: 3
+  m_diffuseColorGridRange: {x: 60, y: 10, z: 40}
+  m_diffuseColorCellSize: 0.1
+  m_diffuseColorMaxCellParticles: 1
+  m_colorDiffusionShader: {fileID: 7200000, guid: e64aba20f3ff3744ab82259fc53d7cea, type: 3}
+  m_materialChangeThreshold: 5
+  m_stepsPerDiffuse: 2

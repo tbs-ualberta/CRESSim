@@ -1,0 +1,144 @@
+#pragma kernel ClearGrid
+#pragma kernel AddParticles
+#pragma kernel DiffuseColors
+#pragma kernel CountExceedingParticles
+
+#define MAX_NEIGHBORS 1
+
+RWStructuredBuffer<int> grid;
+RWStructuredBuffer<int> indices;
+RWStructuredBuffer<float4> particles;
+RWStructuredBuffer<float4> velocities;
+RWStructuredBuffer<float4> colors;
+RWStructuredBuffer<float4> newColors;
+RWStructuredBuffer<float> propertyStates;
+RWStructuredBuffer<float> newPropertyStates;
+
+uint indexCount;
+float cellSize;
+float3 gridSize;
+float numParticles;
+float maxCellParticles;
+
+[numthreads(1024, 1, 1)]
+void ClearGrid (uint3 id : SV_DispatchThreadID) {
+    int idx = id.x;
+    if (idx < gridSize.x * gridSize.y * gridSize.z * maxCellParticles) {
+        grid[idx] = -1;
+    }
+}
+
+[numthreads(512, 1, 1)]
+void AddParticles (uint3 id : SV_DispatchThreadID) {
+    if (id.x >= indexCount) return;
+    int index = indices[id.x];
+    if (index < numParticles) {
+        float4 particle = particles[index];
+        int cellX = floor(particle.x / cellSize) + gridSize.x / 2;
+        if (cellX < 0 || cellX > gridSize.x - 1) return;
+        int cellY = floor(particle.y / cellSize) + gridSize.y / 2;
+        if (cellY < 0 || cellY > gridSize.y - 1) return;
+        int cellZ = floor(particle.z / cellSize) + gridSize.z / 2;
+        if (cellZ < 0 || cellZ > gridSize.z - 1) return;
+        int cellIndex = cellX + cellY * gridSize.x + cellZ * gridSize.x * gridSize.y;
+        for (int i = cellIndex * maxCellParticles; i < (cellIndex + 1) * maxCellParticles; i++)
+        {
+            if (grid[i] == -1)
+            {
+                grid[i] = index;
+                break;
+            }
+        }
+    }
+}
+
+[numthreads(512, 1, 1)]
+void DiffuseColors (uint3 id : SV_DispatchThreadID) {
+    if (id.x >= indexCount) return;
+    int index = indices[id.x];
+    float4 particle = particles[index];
+    float4 mixedColor = float4(0, 0, 0, 0);
+    float totalWeight = 0.0f;
+    float newPropertyState = 0.0f;
+
+    for (int x = -MAX_NEIGHBORS; x <= MAX_NEIGHBORS; x++) {
+        for (int y = -MAX_NEIGHBORS; y <= MAX_NEIGHBORS; y++) {
+            for (int z = -MAX_NEIGHBORS; z <= MAX_NEIGHBORS; z++) {
+                int cellX = floor(particle.x / cellSize) + x + gridSize.x / 2;
+                if (cellX < 0 || cellX > gridSize.x - 1) continue;
+                int cellY = floor(particle.y / cellSize) + y + gridSize.y / 2;
+                if (cellY < 0 || cellY > gridSize.y - 1) continue;
+                int cellZ = floor(particle.z / cellSize) + z + gridSize.z / 2;
+                if (cellZ < 0 || cellZ > gridSize.z - 1) continue;
+                int cellIndex = cellX + cellY * gridSize.x + cellZ * gridSize.x * gridSize.y;
+
+                for (int i = 0; i < maxCellParticles; i++)
+                {
+                    int neighborIndex = grid[cellIndex * maxCellParticles + i];
+                    if (neighborIndex != -1) {
+                        // TODO: length is not efficient
+                        float distance = length(particle.xyz - particles[neighborIndex].xyz);
+                        float weight = exp(-distance * distance * 20);
+                        if (neighborIndex != index)
+                        {
+                            float velocity = dot(velocities[neighborIndex].xyz, velocities[neighborIndex].xyz);
+                            weight = weight * saturate(velocity / 50);
+                        }
+                        mixedColor += colors[neighborIndex] * weight;
+                        newPropertyState += propertyStates[neighborIndex] * weight;
+                        totalWeight += weight;
+                    }
+                }
+            }
+        }
+    }
+
+    if (totalWeight > 0) {
+        newColors[index] = mixedColor / totalWeight;
+        if (newPropertyState > propertyStates[index])
+        {
+            newPropertyStates[index] = newPropertyState / totalWeight;
+        }
+        else
+        {
+            newPropertyStates[index] = propertyStates[index];
+        }
+    } else {
+        newColors[index] = colors[index];
+        newPropertyStates[index] = propertyStates[index];
+    }
+}
+
+RWStructuredBuffer<int> countBuffer;
+float threshold;
+RWStructuredBuffer<int> startIndices;
+RWStructuredBuffer<int> endIndices;
+int pairsCount;
+int totalLength;
+
+[numthreads(1024, 1, 1)]
+void CountExceedingParticles(uint3 id : SV_DispatchThreadID) {
+    int idx = (int)id.x;
+    if (idx < totalLength) {
+        int pairId = -1;
+        for (int i = 0; i < pairsCount; i++)
+        {
+            if (idx >= startIndices[i] && idx < endIndices[i])
+            {
+                pairId = i;
+                break;
+            }
+        }
+        if (pairId >= 0)
+        {
+            int startIndex = startIndices[pairId];
+            int endIndex = endIndices[pairId];
+    
+            if (idx >= startIndex && idx < endIndex) {
+                if (propertyStates[idx] > threshold) {
+                    InterlockedAdd(countBuffer[pairId], 1);
+                }
+            }
+        }
+    }
+}
