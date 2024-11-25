@@ -5,10 +5,11 @@ interface Props {
     description?: string;
     favicon: string;
     thumbnail?: string;
+    googleSiteVerification?: string;
   };
 }
 
-const { title, description, favicon, thumbnail } = Astro.props.frontmatter;
+const { title, description, favicon, thumbnail, googleSiteVerification } = Astro.props.frontmatter;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
@@ -27,6 +28,7 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     {thumbnail && <meta property="og:image" content={prefix + thumbnail} />}
+    {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
