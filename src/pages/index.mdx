@@ -38,7 +38,7 @@ export const components = {pre: CodeBlock}
   ]}
   links={[
     {
-      name: "Unity Project",
+      name: "CRESSim (Unity)",
       url: "https://github.com/tbs-ualberta/CRESSim",
       icon: "mdi:github",
     },
@@ -47,11 +47,15 @@ export const components = {pre: CodeBlock}
       url: "https://github.com/yafei-ou/physx5-for-unity",
       icon: "mdi:github",
     },
+    {
+      name: "CRESSim-MPM (TBA)",
+      icon: "mdi:download-circle",
+    },
   ]}
   />
 
 <Figure>
-  <Image source={overview} altText="Diagram of the transformer deep learning architecture." />
+  <Image source={overview} altText="Overview." />
 </Figure>
 
 <HighlightedSection>
@@ -71,6 +75,11 @@ by developing autonomous agents capable of completing surgical subtasks.
 
 **Learn more about the technical details [here](architecture)**. If you find this project helpful for your research, please consider citing one or more of the papers listed below.
 
+
+<HLine />
+
+***New!*** We are developing a **material point method (MPM) library** for CRESSim. Check out our latest [paper](#cressim-mpm) to learn more.
+
 {/* ```bibtex
 @inproceedings{ou2024realistic,
   title={A Realistic Surgical Simulator for Non-Rigid and Contact-Rich Manipulation in Surgeries with the da Vinci Research Kit}, 
@@ -84,6 +93,17 @@ by developing autonomous agents capable of completing surgical subtasks.
 </HighlightedSection>
 
 ## Project Papers
+
+<h3 id="cressim-mpm">[2025] CRESSim-MPM: A Material Point Method Library for Surgical Soft Body Simulation with Cutting and Suturing</h3>
+
+Yafei Ou, Mahdi Tavakoli\
+*arXiv preprint arXiv:2502.18437* \[[arxiv](https://arxiv.org/abs/2502.18437)\] \[[bib](bib-ou2025cressim)\]
+
+<Figure maxWidth="max-w-3xl">
+  <YouTubeVideo videoId="IwEsBQ508YU" />
+</Figure>
+
+<HLine />
 
 ### [2024] Learning Autonomous Surgical Irrigation and Suction with the da Vinci Research Kit Using Reinforcement Learning
 
