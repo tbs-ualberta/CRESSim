@@ -21,6 +21,7 @@ import LaTeX from "../components/LaTeX.astro";
 import HLine from "../components/HLine.astro";
 
 import zargarzadeh2024decision from "../assets/zargarzadeh2024decision.mp4";
+import cressimNeo from "../assets/CRESSim-Neo-Public.webm";
 import ou2024learning from "../assets/ou2024learning.mp4";
 import overview from "../assets/overview.png";
 
@@ -37,6 +38,16 @@ export const components = {pre: CodeBlock}
     }
   ]}
   links={[
+    {
+      name: "CRESSim-Neo",
+      url: "https://cressim-neo.yafei.dev/",
+      icon: "mdi:web",
+    },
+    {
+      name: "CRESSim-Neo Code",
+      url: "https://github.com/yafei-ou/CRESSim-Neo",
+      icon: "mdi:github",
+    },
     {
       name: "CRESSim (Unity)",
       url: "https://github.com/tbs-ualberta/CRESSim",
@@ -64,22 +75,21 @@ export const components = {pre: CodeBlock}
 ## Overview
 
 Realistic and real-time surgical simulators play an increasingly important role in surgical robotics research,
-such as surgical robot learning and automation, and surgical skills assessment. 
-The ability to simulate the diverse types of objects and contact-rich manipulation tasks,
-such as tissue cutting and blood suction, is important as they typically present in surgeries.
-We propose another surgical simulator for the da Vinci Research Kit (dVRK), CRESSim,
-that enables simulating various contact-rich surgical tasks involving different surgical instruments, soft tissue, and body fluids.
-The real-world dVRK console and the master tool manipulator (MTM) robots are incorporated into the system to allow for teleoperation
-through virtual reality (VR).
-With CRESSim, we aim to advance surgical autonomy and augmented dexterity for surgeons
-by developing autonomous agents capable of completing surgical subtasks.
+such as surgical robot learning and automation, and surgical skills assessment.
+The ability to simulate diverse objects and contact-rich manipulation tasks, such as tissue cutting and blood suction,
+is important because they commonly arise in surgery. CRESSim enables simulation of surgical tasks involving different instruments,
+soft tissue, and body fluids, and incorporates the da Vinci Research Kit (dVRK) console and master tool manipulators (MTMs)
+for virtual-reality teleoperation.
 
-**Learn more about the technical details [here](architecture)**. If you find this project helpful for your research, please consider citing one or more of the papers listed below.
+Our latest engine, CRESSim-Neo, is a batched GPU position-based dynamics (PBD) engine for rigid bodies, deformable tissue, fluids, and strands,
+with batched rendering, surgery-specific sensing, and a GPU-resident data pipeline for scalable surgical robot learning.
+
+If you find this project helpful for your research, please consider citing one or more of the papers listed below.
 
 
 <HLine />
 
-***New!*** We developed a **material point method (MPM) library** for CRESSim. Check out our latest [paper](#cressim-mpm) to learn more.
+***New!*** Learn about **CRESSim-Neo**, our batched GPU simulation engine for surgical robotics and robot learning, in our latest [paper](#cressim-neo).
 
 {/* ```bibtex
 @inproceedings{ou2024realistic,
@@ -94,6 +104,24 @@ by developing autonomous agents capable of completing surgical subtasks.
 </HighlightedSection>
 
 ## Project Papers
+
+<h3 id="cressim-neo">[2026] CRESSim-Neo: A Batched GPU Simulation Engine for Surgical Robotics and Robot Learning</h3>
+
+Yafei Ou, Ahnaf Naheen, Tleukhan Mussin, Hans Jarales, Melwin Chacko Moncy, Mahdi Tavakoli\
+*arXiv preprint* \[[arxiv](https://arxiv.org/abs/2608.25192)\] \[[bib](bib-ou2026cressim-neo)\] \[[code](https://github.com/yafei-ou/CRESSim-Neo)\] \[[website](https://cressim-neo.yafei.dev/)\]
+
+<Figure maxWidth="max-w-3xl">
+  <Video source={cressimNeo} mediaType="video/webm" autoplay={false} />
+</Figure>
+
+<HLine />
+
+### [2026] Simulation of Surgical Suturing Using Position-Based Dynamics and the Material Point Method for Robot Reinforcement Learning
+
+Tleukhan Mussin, Yafei Ou, Mahdi Tavakoli\
+*IEEE RAS/EMBS 11th International Conference on Biomedical Robotics and Biomechatronics (BioRob)* \[[arxiv](https://arxiv.org/abs/2607.27494)\] \[[bib](bib-mussin2026suturing)\]
+
+<HLine />
 
 <h3 id="cressim-mpm">[2025] CRESSim-MPM: A Material Point Method Library for Surgical Soft Body Simulation with Cutting and Suturing</h3>
 
@@ -110,6 +138,8 @@ Yafei Ou, Mahdi Tavakoli\
 
 Yafei Ou, Mahdi Tavakoli\
 *IEEE Transactions on Automation Science and Engineering* \[[paper](https://ieeexplore.ieee.org/abstract/document/11023631)\] \[[arxiv](https://arxiv.org/abs/2411.14622)\] \[[bib](bib-ou2024learning)\] \[[code](https://github.com/tbs-ualberta/CRESSim)\]
+
+**Learn more about the technical details [here](architecture).**
 
 <Figure maxWidth="max-w-3xl">
   <YouTubeVideo videoId="yvgTuXm1IwQ" />

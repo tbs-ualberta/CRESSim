@@ -5,9 +5,10 @@ interface Props {
   controls?: boolean;
   muted?: boolean;
   loop?: boolean;
+  mediaType?: string;
 }
 
-const { source, autoplay = true, controls = true, muted = false, loop = false } = Astro.props;
+const { source, autoplay = true, controls = true, muted = false, loop = false, mediaType = "video/mp4" } = Astro.props;
 ---
 
 <div class="w-full flex justify-center">
@@ -18,6 +19,6 @@ const { source, autoplay = true, controls = true, muted = false, loop = false } 
     { ...(muted ? { muted: "true" } : {}) }
     { ...(loop ? { loop: "true" } : {}) }
   >
-    <source src={source} type="video/mp4" />
+    <source src={source} type={mediaType} />
   </video>
 </div>
